@@ -1,3 +1,7 @@
+## 0.0.2
+
+* Remove flutter_simple_treeview package and build own tree view
+
 ## 0.0.2-dev.1 - 2021.08.20
 
 * Update Readme.
