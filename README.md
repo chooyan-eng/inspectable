@@ -2,7 +2,7 @@
 
 Inspectable is a widget which inspect entire descendant widgets.
 
-![inspectable_demo]()
+![inspectable_demo](https://github.com/chooyan-eng/inspectable/raw/main/assets/inspectable_sample.gif)
 
 ## Features
 
