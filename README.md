@@ -2,6 +2,8 @@
 
 Inspectable is a widget which inspect entire descendant widgets.
 
+![inspectable_demo]()
+
 ## Features
 
 - Inspect widgets belonging to its subtree.
