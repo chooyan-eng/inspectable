@@ -1,3 +1,9 @@
+## 0.1.0
+
+* Show detail when widget name is tapped.
+* Show attatched key next to widget name.
+* Add `verbose` flag.
+
 ## 0.0.2
 
 * Remove flutter_simple_treeview package and build own tree view

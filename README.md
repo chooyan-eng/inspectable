@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
           Material: Colors.red,
           GestureDetector: Colors.teal,
         }
+        verbose: true,
       ),
     );
   }
@@ -38,6 +39,8 @@ class MyApp extends StatelessWidget {
 ```
 
 Optionally, you can colorize and emphasize the name of widgets with `colors` property.
+
+`verbose` is a flag to switch whether to show private widgets which name starts with `_`.
 
 2. call `Inspectable.of(context).inspect()` to display Widget tree.
 
