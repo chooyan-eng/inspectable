@@ -1,0 +1,19 @@
+name: inspectable
+description: Inspectable visualize the widget tree on your devices.
+version: 0.0.1
+homepage: https://github.com/chooyan-eng/inspectable
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.20.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_simple_treeview: ^3.0.0-nullsafety.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
