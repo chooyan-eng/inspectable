@@ -26,31 +26,81 @@ class _ViewerState extends State<_Viewer> {
         Row(
           children: [
             SizedBox(width: (12 * depth).toDouble()),
+            if (node.children.isNotEmpty)
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    if (_expandingNodes.contains(node)) {
+                      _expandingNodes.remove(node);
+                    } else {
+                      _expandingNodes.add(node);
+                    }
+                  });
+                },
+                child: Icon(
+                  _expandingNodes.contains(node)
+                      ? Icons.expand_more
+                      : Icons.chevron_right_outlined,
+                  size: 20,
+                ),
+              ),
+            const SizedBox(width: 4),
             InkWell(
               onTap: () {
-                setState(() {
-                  if (_expandingNodes.contains(node)) {
-                    _expandingNodes.remove(node);
-                  } else {
-                    _expandingNodes.add(node);
-                  }
-                });
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return Container(
+                      height: MediaQuery.of(context).size.height / 2,
+                      width: MediaQuery.of(context).size.width,
+                      color: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Text(
+                          node.description,
+                        ),
+                      ),
+                    );
+                  },
+                );
               },
-              child: Icon(
-                _expandingNodes.contains(node)
-                    ? Icons.expand_more
-                    : Icons.chevron_right_outlined,
-                size: 20,
+              child: Text(
+                node.runtimeType.toString(),
+                style: TextStyle(
+                  color: widget.colors[node.runtimeType] ?? Colors.black,
+                  fontSize:
+                      widget.colors.containsKey(node.runtimeType) ? 24 : 20,
+                ),
               ),
             ),
             const SizedBox(width: 4),
-            Text(
-              node.runtimeType.toString(),
-              style: TextStyle(
-                color: widget.colors[node.runtimeType] ?? Colors.black,
-                fontSize: widget.colors.containsKey(node.runtimeType) ? 24 : 16,
-              ),
-            ),
+            if (node.key != null)
+              InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return Container(
+                        height: MediaQuery.of(context).size.height / 2,
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Text(
+                            node.key!.toString(),
+                            style: const TextStyle(fontSize: 20),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+                child: Icon(
+                  Icons.vpn_key,
+                  size: 20,
+                  color: Colors.red.shade300,
+                ),
+              )
           ],
         ),
       );
@@ -75,11 +125,3 @@ class _ViewerState extends State<_Viewer> {
     );
   }
 }
-
-//         ),
-//         children: (_elementTree[element] ?? []).map(buildNode).toList(),
-//       );
-//     }
-
-//     return buildNode(rootElement);
-//   }
