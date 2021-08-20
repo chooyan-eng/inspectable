@@ -15,6 +15,8 @@ class _Viewer extends StatefulWidget {
 }
 
 class _ViewerState extends State<_Viewer> {
+  final _expandingNodes = <Node>[];
+
   @override
   Widget build(BuildContext context) {
     var rows = <Widget>[];
@@ -24,6 +26,24 @@ class _ViewerState extends State<_Viewer> {
         Row(
           children: [
             SizedBox(width: (12 * depth).toDouble()),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  if (_expandingNodes.contains(node)) {
+                    _expandingNodes.remove(node);
+                  } else {
+                    _expandingNodes.add(node);
+                  }
+                });
+              },
+              child: Icon(
+                _expandingNodes.contains(node)
+                    ? Icons.expand_more
+                    : Icons.chevron_right_outlined,
+                size: 20,
+              ),
+            ),
+            const SizedBox(width: 4),
             Text(
               node.runtimeType.toString(),
               style: TextStyle(
@@ -34,8 +54,11 @@ class _ViewerState extends State<_Viewer> {
           ],
         ),
       );
-      for (final child in node.children) {
-        appendRowRecursively(child, depth + 1);
+
+      if (_expandingNodes.contains(node)) {
+        for (final child in node.children) {
+          appendRowRecursively(child, depth + 1);
+        }
       }
     }
 
