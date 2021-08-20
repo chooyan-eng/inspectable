@@ -1,6 +1,6 @@
 name: inspectable
 description: Inspectable visualize the widget tree on your devices.
-version: 0.0.1
+version: 0.0.2-dev.1
 homepage: https://github.com/chooyan-eng/inspectable
 
 environment:
