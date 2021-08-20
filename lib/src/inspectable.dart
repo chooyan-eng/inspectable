@@ -1,13 +1,21 @@
 part of inspectable;
 
 class Inspectable extends StatefulWidget {
+  /// [Widget] represents app's main contents
   final Widget child;
+
+  /// Color palette to emphasize specific widget
   final Map<Type, Color> colors;
+
+  /// Flag to show private widget classes.
+  /// Defalut [false]
+  final bool verbose;
 
   const Inspectable({
     Key? key,
     required this.child,
     this.colors = const <Type, Color>{},
+    this.verbose = false,
   }) : super(key: key);
 
   /// Find [InspectableState] which is found as a closest descendant of given [context].
@@ -51,17 +59,23 @@ class InspectableState extends State<Inspectable> {
         key: rootWidget.key,
       );
 
-      if (root == null) {
-        root = node;
-      } else {
-        child.visitAncestorElements((parent) {
-          final parentNode = nodeReferences[parent.widget.hashCode];
-          parentNode?.children.add(node);
-          return false;
-        });
-      }
+      if (widget.verbose || !node.runtimeType.toString().startsWith('_')) {
+        if (root == null) {
+          root = node;
+        } else {
+          child.visitAncestorElements((parent) {
+            final parentNode = nodeReferences[parent.widget.hashCode];
+            if (parentNode == null) {
+              return true;
+            } else {
+              parentNode.children.add(node);
+              return false;
+            }
+          });
+        }
 
-      nodeReferences[node.objectId] = node;
+        nodeReferences[node.objectId] = node;
+      }
       child.visitChildren(inspectRecursively);
     }
 

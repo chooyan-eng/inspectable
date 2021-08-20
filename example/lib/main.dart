@@ -59,7 +59,10 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headline4,
             ),
             const SizedBox(height: 60),
-            Inspectable(child: InspectButton()),
+            Inspectable(
+              child: InspectButton(),
+              verbose: true,
+            ),
           ],
         ),
       ),

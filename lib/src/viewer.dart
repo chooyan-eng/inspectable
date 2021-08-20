@@ -58,6 +58,7 @@ class _ViewerState extends State<_Viewer> {
                         padding: const EdgeInsets.all(16),
                         child: Text(
                           node.description,
+                          style: const TextStyle(fontSize: 20),
                         ),
                       ),
                     );
