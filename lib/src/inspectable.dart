@@ -52,11 +52,14 @@ class InspectableState extends State<Inspectable> {
     final nodeReferences = <int, Node>{};
     void inspectRecursively(Element child) {
       final rootWidget = child.widget;
+
+      final attributes = _parseDescription(rootWidget.toStringDeep());
       final node = Node(
         objectId: rootWidget.hashCode,
         runtimeType: rootWidget.runtimeType,
-        description: rootWidget.toStringDeep(),
+        attributes: attributes,
         key: rootWidget.key,
+        subText: rootWidget is Text ? attributes.first : null,
       );
 
       if (widget.verbose || !node.runtimeType.toString().startsWith('_')) {
@@ -86,6 +89,15 @@ class InspectableState extends State<Inspectable> {
     final rootInspectable =
         context.findRootAncestorStateOfType<InspectableState>() ?? this;
     rootInspectable._openInspector(root!);
+  }
+
+  List<String> _parseDescription(String description) {
+    final attributeMatches = RegExp(r'(?<=\().+(?=\))').allMatches(description);
+    if (attributeMatches.isNotEmpty) {
+      final matchString = attributeMatches.first.group(0);
+      return matchString?.split(',') ?? [];
+    }
+    return [];
   }
 
   void _openInspector(Node root) {

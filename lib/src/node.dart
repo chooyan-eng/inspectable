@@ -8,8 +8,11 @@ class Node {
   /// Type of the widget
   final Type runtimeType;
 
+  /// subtext of the widget
+  final String? subText;
+
   /// Description of the widget
-  final String description;
+  final List<String> attributes;
 
   /// Descendant nodes.
   final children = <Node>[];
@@ -20,7 +23,8 @@ class Node {
   Node({
     required this.objectId,
     required this.runtimeType,
-    required this.description,
+    this.subText,
+    required this.attributes,
     this.key,
   });
 }

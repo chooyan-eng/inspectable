@@ -54,11 +54,29 @@ class _ViewerState extends State<_Viewer> {
                       height: MediaQuery.of(context).size.height / 2,
                       width: MediaQuery.of(context).size.width,
                       color: Colors.white,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Text(
-                          node.description,
-                          style: const TextStyle(fontSize: 20),
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Center(
+                                child: Text(
+                                  node.runtimeType.toString(),
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    color: widget.colors[node.runtimeType] ??
+                                        Colors.black87,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              ...node.attributes.map((attribute) => Text(
+                                    attribute.trim(),
+                                    style: const TextStyle(fontSize: 20),
+                                  ))
+                            ],
+                          ),
                         ),
                       ),
                     );
@@ -101,7 +119,12 @@ class _ViewerState extends State<_Viewer> {
                   size: 20,
                   color: Colors.red.shade300,
                 ),
-              )
+              ),
+            if (node.subText != null)
+              Text(
+                node.subText!,
+                style: const TextStyle(color: Colors.black54),
+              ),
           ],
         ),
       );

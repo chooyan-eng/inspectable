@@ -60,7 +60,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 60),
             Inspectable(
-              child: InspectButton(),
+              child: InspectButton(
+                key: ValueKey('InspectTestKey'),
+              ),
               verbose: true,
             ),
           ],
