@@ -65,6 +65,24 @@ Inspectable(
 
 note that in this case, you must use `context` below `AnyWidgetForInspect` as context would look up closest ancestor `Inspectable` of it.
 
+4. If you want to inspect `State` of `StatefulWidget`, overriding `debugFillProperties()` is required. Example below tries to display its private fields, `_someIntState` and `_someBoolState`.
+
+```dart  
+@override
+void debugFillProperties(properties) {
+  super.debugFillProperties(properties);
+  properties.add(IntProperty('someIntState', _someIntState, defaultValue: null));
+  properties.add(FlagProperty(
+    'someBoolState',
+    value: _someBoolState,
+    defaultValue: null,
+    ifTrue: 'flag is true',
+    ifFalse: 'flag is false',
+  ));
+}
+```
+
+As `debugFillProperties` is often used in Flutter framework, you can refer codes of widgets such as `Text` to understand more usages in detail.
 
 # Contact
 

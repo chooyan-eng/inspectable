@@ -1,3 +1,7 @@
+## 0.1.2 - 2021.08.21
+
+* Display State of StatefulWidget
+
 ## 0.1.1 - 2021.08.21
 
 * Display attributes of widgets with formatted string.
