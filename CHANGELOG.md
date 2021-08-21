@@ -1,10 +1,15 @@
-## 0.1.0
+## 0.1.1 - 2021.08.21
+
+* Display attributes of widgets with formatted string.
+* Display text of Text widget.
+
+## 0.1.0 - 2021.08.20
 
 * Show detail when widget name is tapped.
 * Show attatched key next to widget name.
 * Add `verbose` flag.
 
-## 0.0.2
+## 0.0.2 - 2021.08.20
 
 * Remove flutter_simple_treeview package and build own tree view
 
