@@ -54,9 +54,12 @@ class InspectableState extends State<Inspectable> {
       final rootWidget = child.widget;
 
       final attributes = _parseDescription(rootWidget.toStringDeep());
+      final state = child is StatefulElement ? child.state : null;
+
       final node = Node(
         objectId: rootWidget.hashCode,
         runtimeType: rootWidget.runtimeType,
+        state: state,
         attributes: attributes,
         key: rootWidget.key,
         subText: rootWidget is Text ? attributes.first : null,
@@ -89,15 +92,6 @@ class InspectableState extends State<Inspectable> {
     final rootInspectable =
         context.findRootAncestorStateOfType<InspectableState>() ?? this;
     rootInspectable._openInspector(root!);
-  }
-
-  List<String> _parseDescription(String description) {
-    final attributeMatches = RegExp(r'(?<=\().+(?=\))').allMatches(description);
-    if (attributeMatches.isNotEmpty) {
-      final matchString = attributeMatches.first.group(0);
-      return matchString?.split(',') ?? [];
-    }
-    return [];
   }
 
   void _openInspector(Node root) {

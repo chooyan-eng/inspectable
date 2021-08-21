@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:inspectable/inspectable.dart';
@@ -77,10 +78,18 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class InspectButton extends StatelessWidget {
+class InspectButton extends StatefulWidget {
   const InspectButton({
     Key? key,
   }) : super(key: key);
+
+  @override
+  _InspectButtonState createState() => _InspectButtonState();
+}
+
+class _InspectButtonState extends State<InspectButton> {
+  var _someBoolState = false;
+  var _someIntState = 10;
 
   @override
   Widget build(BuildContext context) {
@@ -93,5 +102,19 @@ class InspectButton extends StatelessWidget {
         style: TextStyle(fontSize: 24),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(IntProperty('someIntState', _someIntState, defaultValue: null));
+    properties.add(FlagProperty(
+      'someBoolState',
+      value: _someBoolState,
+      defaultValue: null,
+      ifTrue: 'flag is true',
+      ifFalse: 'flag is false',
+    ));
   }
 }

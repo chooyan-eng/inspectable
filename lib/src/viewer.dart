@@ -93,6 +93,55 @@ class _ViewerState extends State<_Viewer> {
               ),
             ),
             const SizedBox(width: 4),
+            if (node.state != null)
+              InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return Container(
+                        height: MediaQuery.of(context).size.height / 2,
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.white,
+                        child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Center(
+                                  child: Text(
+                                    node.state.runtimeType.toString(),
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      color: widget.colors[node.runtimeType] ??
+                                          Colors.black87,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                ..._parseDescription(node.state.toString()).map(
+                                  (line) => Text(
+                                    line.trim(),
+                                    style: const TextStyle(fontSize: 20),
+                                  ),
+                                ),
+                              ],
+                            )),
+                      );
+                    },
+                  );
+                },
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                  color: Colors.blue,
+                  child: Text(
+                    'State',
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                ),
+              ),
+            const SizedBox(width: 4),
             if (node.key != null)
               InkWell(
                 onTap: () {
