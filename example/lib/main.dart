@@ -60,11 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headline4,
             ),
             const SizedBox(height: 60),
-            Inspectable(
-              child: InspectButton(
-                key: ValueKey('InspectTestKey'),
-              ),
-              verbose: true,
+            InspectButton(
+              key: ValueKey('InspectTestKey'),
             ),
           ],
         ),
@@ -75,6 +72,12 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('count', _counter, defaultValue: null));
   }
 }
 
